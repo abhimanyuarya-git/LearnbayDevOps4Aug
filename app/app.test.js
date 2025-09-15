@@ -9,7 +9,7 @@ describe('Express App Tests', () => {
   test('GET / should return welcome message', async () => {
     const response = await request(app).get('/');
     expect(response.status).toBe(200);
-    expect(response.body.message).toBe('Hello from Jenkins Pipeline Test!');
+    expect(response.body.message).toBe('Hello from Jenkins Pipeline Test New!');
     expect(response.body.timestamp).toBeDefined();
   });
 
