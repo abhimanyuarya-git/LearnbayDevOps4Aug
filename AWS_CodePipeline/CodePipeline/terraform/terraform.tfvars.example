@@ -1,0 +1,6 @@
+aws_region    = "us-east-1"
+project_name  = "learnbay-devops"
+github_owner  = "your-github-username"
+github_repo   = "LearnbayDevOps4Aug"
+github_token  = "ghp_your_github_token_here"
+source_branch = "develop"
