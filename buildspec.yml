@@ -1,0 +1,55 @@
+version: 0.2
+
+# SRE-compliant build specification
+env:
+  variables:
+    NODE_VERSION: "18"
+    BUILD_TIMEOUT: "300"
+  
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo "[$(date)] Installing build dependencies"
+      - echo "Using default npm version compatible with Node.js 18"
+      
+  pre_build:
+    commands:
+      - echo "[$(date)] Pre-build validation started"
+      - node --version && npm --version
+      - echo "[$(date)] Installing application dependencies"
+      - npm install --omit=dev
+      
+  build:
+    commands:
+      - echo "[$(date)] Build phase started"
+      - echo "[$(date)] Running code quality checks"
+      - npm run lint || (echo "Linting failed" && exit 1)
+      - echo "[$(date)] Running unit tests"
+      - npm test || (echo "Tests failed" && exit 1)
+      - echo "[$(date)] Building application"
+      - npm run build 2>/dev/null || echo "No build script - using source files"
+      - echo "[$(date)] Creating deployment artifacts"
+      - zip -r deployment-package.zip . -x "node_modules/*" "*.git*" "*.zip" "coverage/*"
+      
+  post_build:
+    commands:
+      - echo "[$(date)] Post-build phase completed"
+      - echo "Build artifacts ready for deployment"
+      - ls -la deployment-package.zip
+
+artifacts:
+  files:
+    - '**/*'
+  name: build-$(date +%Y%m%d-%H%M%S)
+  
+cache:
+  paths:
+    - 'node_modules/**/*'
+    
+reports:
+  test-results:
+    files:
+      - 'test-results.xml'
+    file-format: 'JUNITXML'
