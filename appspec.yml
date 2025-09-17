@@ -21,6 +21,10 @@ permissions:
       - file
 
 hooks:
+  ApplicationStop:
+    - location: scripts/stop_application.sh
+      timeout: 300
+      runas: root
   BeforeInstall:
     - location: scripts/stop_application.sh
       timeout: 300
@@ -31,10 +35,6 @@ hooks:
       runas: root
   ApplicationStart:
     - location: scripts/start_application.sh
-      timeout: 300
-      runas: root
-  ApplicationStop:
-    - location: scripts/stop_application.sh
       timeout: 300
       runas: root
   ValidateService:
