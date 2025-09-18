@@ -13,13 +13,13 @@
 ```bash
 # Create CodeDeploy application
 aws deploy create-application \
-    --application-name MyNodeApp \
+    --application-name learnbay-app \
     --compute-platform Server
 
 # Create deployment group
 aws deploy create-deployment-group \
-    --application-name MyNodeApp \
-    --deployment-group-name MyNodeApp-DeploymentGroup \
+    --application-name learnbay-app \
+    --deployment-group-name learnbay-app-DeploymentGroup \
     --service-role-arn arn:aws:iam::YOUR-ACCOUNT:role/CodeDeployServiceRole \
     --ec2-tag-filters Key=Name,Value=MyAppServer,Type=KEY_AND_VALUE
 ```
@@ -60,9 +60,9 @@ Ensure your repository has:
 ```bash
 # Create deployment
 aws deploy create-deployment \
-    --application-name MyNodeApp \
-    --deployment-group-name MyNodeApp-DeploymentGroup \
-    --s3-location bucket=YOUR-BUCKET,key=myapp.zip,bundleType=zip
+    --application-name learnbay-app \
+    --deployment-group-name learnbay-app-DeploymentGroup \
+    --s3-location bucket=YOUR-BUCKET,key=learnbay-app.zip,bundleType=zip
 ```
 
 ### 3. Monitor Deployment

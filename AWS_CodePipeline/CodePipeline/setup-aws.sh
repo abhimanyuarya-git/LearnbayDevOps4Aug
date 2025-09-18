@@ -17,12 +17,12 @@ ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 aws s3 mb s3://$BUCKET_NAME
 
 # Create CodeDeploy application
-aws deploy create-application --application-name MyNodeApp --compute-platform Server
+aws deploy create-application --application-name learnbay-app --compute-platform Server
 
 # Create deployment group
 aws deploy create-deployment-group \
-    --application-name MyNodeApp \
-    --deployment-group-name MyNodeApp-DeploymentGroup \
+    --application-name learnbay-app \
+    --deployment-group-name learnbay-app-DeploymentGroup \
     --service-role-arn arn:aws:iam::${ACCOUNT_ID}:role/CodeDeployServiceRole \
     --ec2-tag-filters Key=Name,Value=MyAppServer,Type=KEY_AND_VALUE
 

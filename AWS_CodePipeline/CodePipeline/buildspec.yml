@@ -22,4 +22,4 @@ phases:
 artifacts:
   files:
     - '**/*'
-  name: myapp-$(date +%Y-%m-%d)
+  name: learnbay-app-$(date +%Y-%m-%d)

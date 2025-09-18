@@ -1,7 +1,7 @@
 {
-  "name": "aws-codepipeline-sample-app",
+  "name": "learnbay-app",
   "version": "1.0.0",
-  "description": "Sample Node.js application for AWS CodePipeline",
+  "description": "Learnbay Node.js application for AWS CodePipeline",
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",

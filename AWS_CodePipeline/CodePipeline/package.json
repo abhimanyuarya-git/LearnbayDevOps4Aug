@@ -1,7 +1,7 @@
 {
-  "name": "my-node-app",
+  "name": "learnbay-app",
   "version": "1.0.0",
-  "description": "Node.js application for AWS CodeDeploy",
+  "description": "Learnbay Node.js application for AWS CodeDeploy",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
