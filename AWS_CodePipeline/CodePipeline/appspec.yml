@@ -1,0 +1,44 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/html/myapp
+    overwrite: yes
+permissions:
+  - object: /var/www/html/myapp
+    owner: ec2-user
+    group: ec2-user
+    mode: 755
+    type:
+      - directory
+  - object: /var/www/html/myapp/scripts
+    owner: ec2-user
+    group: ec2-user
+    mode: 755
+    type:
+      - directory
+  - object: /var/www/html/myapp/scripts/*.sh
+    owner: ec2-user
+    group: ec2-user
+    mode: 755
+hooks:
+  BeforeInstall:
+    - location: scripts/stop_application.sh
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: scripts/install_dependencies.sh
+      timeout: 600
+      runas: root
+  ApplicationStart:
+    - location: scripts/start_application.sh
+      timeout: 300
+      runas: root
+  ApplicationStop:
+    - location: scripts/stop_application.sh
+      timeout: 300
+      runas: root
+  ValidateService:
+    - location: scripts/validate_service.sh
+      timeout: 300
+      runas: root

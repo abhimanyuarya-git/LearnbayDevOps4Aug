@@ -22,3 +22,8 @@ chown ec2-user:ec2-user /var/www/html/myapp
 # Start CodeDeploy agent
 service codedeploy-agent start
 chkconfig codedeploy-agent on
+
+# Configure PM2 to start on boot
+env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u ec2-user --hp /home/ec2-user
+
+echo "EC2 instance setup completed"
